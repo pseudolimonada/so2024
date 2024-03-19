@@ -1,0 +1,5 @@
+Command help:
+
+Create mobile user > $mobile_user / {plafond inicial} / {número de pedidos de autorização} / {intervalo VIDEO} {intervalo MUSIC} {intervalo SOCIAL} / {dados a reservar} 
+Create backoffice user > $backoffice_user
+Create system manager > $ 5g_auth_platform {config-file}
