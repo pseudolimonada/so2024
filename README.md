@@ -1,2 +1,2 @@
 # so2024
-Mobile Network Manager project for Operating Systems coruse
+Mobile Network Manager project for Operating Systems course
