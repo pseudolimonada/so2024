@@ -1,0 +1,23 @@
+1.
+a) cada vez que corro o programa crio novos processos.
+b) o pai termina pq nao tem wait (o filho espera sempre pelo wait,
+   no caso em que o pai termina, o filho e adotado pelo TERMINAL que tem waits
+   preventivos) -> ORFAO!
+c) o filho fica vivo, e adotado pelo TERMINAL em background, ORFAO!
+d) o terminal, a nao ser que o programa seja executado no background ent e o SO
+e) agora o filho termina sem o pai notar! o pai continua a guardar os recursos ate terminar.
+e+) se o programa continuasse, o filho nunca ia morrer ate ao programa terminar, pode parecer inutil matar o filho mas isso e uma precepcao falsa pq quando o programa termina o SO esta a fazer waits que matam o filho (mesmo que o pai nao o tenha matado nunca)
+
+2.
+
+3a. e suposto dar 8 prints, sao criados 8 processos, 
+2 processos dao o print 0,1,2:
+2 processos dao o print 1,2:
+4 processos dao o print 2:
+vai dar print de 2 0s, 4 1s, e 8 2s
+3b. a minha intuicao pensou no ciclo meter i < log(n) mas isto so garante exatamente N se N=2*k k=0,1,...for(int i = 0; i< n; i++){
+a solucao correta e fazer um exit depois de dar print se o id for 0, se nao continua, ou seja so o pai e que avanca.
+
+4a
+
+
