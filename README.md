@@ -17,3 +17,7 @@ Exemplo:
 500
 100
 300
+
+NOTAS:
+a zona de memoria partilhada tem 10kB, existe um exercicio que explica isto, nao é para estar sempre a gerar shared memories. é apra usar aritmetica de ponteiros e structs
+
