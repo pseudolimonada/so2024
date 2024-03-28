@@ -1,0 +1,20 @@
+[2024-03-27 05:04:20] Config file read successfully. MOBILE_USERS: 50, QUEUE_POS: 30, AUTH_SERVERS: 6, AUTH_PROC_TIME: 500, MAX_VIDEO_WAIT: 100, MAX_OTHERS_WAIT: 300
+[2024-03-27 05:23:03]Command doesn't exist.
+[2024-03-27 05:23:09]Command doesn't exist.
+[2024-03-27 05:23:10]Command doesn't exist.
+[2024-03-27 05:23:12]Command doesn't exist.
+[2024-03-27 05:30:59]Invalid number of args.
+[2024-03-27 05:31:44]Invalid number of args.
+[2024-03-27 05:31:44]Command doesn't exist.
+[2024-03-27 05:32:15]Invalid number of args.
+[2024-03-27 05:32:15]Command doesn't exist.
+[2024-03-27 05:32:22]Invalid number of args.
+[2024-03-27 05:33:22]Invalid number of args.
+[2024-03-27 05:33:22]Command doesn't exist.
+[2024-03-27 05:33:32]Invalid number of args.
+[2024-03-27 05:33:36]Invalid number of args.
+[2024-03-27 05:33:36]Command doesn't exist.
+[2024-03-27 05:34:48]Invalid number of args.
+[2024-03-27 05:34:48]Command doesn't exist.
+[2024-03-27 05:37:58]Invalid number of args.
+[2024-03-27 05:38:17]Invalid number of args.

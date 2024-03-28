@@ -1,21 +1,23 @@
 CC     = gcc
 FLAGS  = -Wall -Wextra -g
-
-PROGS  = sysmanager main
-OBJS1  = sysmanager.o 
-OBJS2  = main.o logs.o
-DEPS  = logs.h
+PROGS  = exe/sysmanager exe/main
+OBJS1  = exe/sysmanager.o exe/logs.o exe/authmanager.o
+OBJS2  = exe/main.o exe/logs.o
+DEPS  = src/logs.h
 
 all:	${PROGS}
 
 clean:
-	rm ${PROGS} *.o *~
+	rm ${PROGS} exe/*.o *~
 
-sysmanager:	${OBJS1}
+exe/sysmanager:	${OBJS1} ${DEPS}
 	${CC} ${FLAGS} ${OBJS1} -o $@
 
-main:	${OBJS2} ${DEPS}
+exe/main:	${OBJS2} ${DEPS}
 	${CC} ${FLAGS} ${OBJS2} -o $@
 
-%.o: %.c
+exe/authmanager.o: src/authmanager.c ${DEPS}
+	${CC} -pthread ${FLAGS} -c $< -o $@
+
+exe/%.o: src/%.c 
 	${CC} ${FLAGS} -c $< -o $@

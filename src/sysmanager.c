@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include "logs.h"
+#include "sysmanager.h"
+#include "authmanager.h"
 #include <errno.h>
 
 #define MBUF 1024
@@ -9,35 +8,23 @@
 
 int MOBILE_USERS, QUEUE_POS, AUTH_SERVERS, AUTH_PROC_TIME, MAX_VIDEO_WAIT, MAX_OTHERS_WAIT;
 
-void write_log(char *str){
-    char timestamp[MBUF];
-    
-    //create log string with timestamp
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    
-    sprintf(timestamp, "[%d-%02d-%02d %02d:%02d:%02d]", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-    
-    FILE *file = fopen("log.txt","a");
-    fprintf(file, "%s %s\n",timestamp,str);
-    fclose(file);
+sem_t *mutex_log, *mutex_memory;
+info_struct *info;
+mobile_struct *mobiles;
 
-    //fechar a sincronização
-    printf("%s %s\n",timestamp,str);
+void *monitor_engine(){
+    return(0);
 }
 
-void monitor_engine(){
-
+void *authorization_manager(){
+    return(0);
 }
 
-void authorization_manager(){
-
+void *message_queue(){
+    return(0);
 }
 
-void message_queue(){
-
-}
-
+//reads config file
 void read_config(const char *config_file){
     char message[MBUF];
     FILE *file = fopen(config_file,"r");
@@ -91,6 +78,38 @@ void read_config(const char *config_file){
     write_log(message);
 }
 
+void show_shm(){
+  printf("Showing shm (integer by integer):\n");
+  // The effect of p+n where p is a pointer and n is an integer is to compute the address equal to p plus n times the size of whatever p points to
+  int *p = (int *) info;
+//   for(int i=0;i<( (sizeof(info_struct)+sizeof(order_struct)*n_orders+sizeof(sell_struct)*n_orders)/sizeof(int));i++){
+//     printf("%d  ",*(p+i));
+//     if(i%2==1) printf("\n");
+//   }
+  printf("\n");
+}
+
+//cleans resources after SIGNINT
+void finish() {
+  show_shm();
+
+  printf("Cleaning resources...\n");
+  sem_close(mutex_log);
+  sem_close(mutex_memory);
+  sem_unlink("MUTEX_LOG");
+  sem_unlink("MUTEX_MEMORY");
+  shmdt(info);
+  // shmctl(shmid, IPC_RMID, NULL);
+
+  write_log("Closing program!");
+  exit(0);
+}
+
+//called on SIGNINT signal
+void sigint(int signum){
+  finish();
+}
+
 
 int main(int argc, char const *argv[])
 {
@@ -103,12 +122,31 @@ int main(int argc, char const *argv[])
     read_config(argv[1]);
 
     //cria shared mem (info + NMAX_USERS * client_struct + )
-
-    //creates shared memory (needs struct and pointer arithmetics)
     
-    //creates authorization manager  (já é dado o numero de authorization engines que vao ser criados ao inicio)
-    //creates monitor enginee
-    //creates message queue
+    
+
+    // creates semaphores of log for all of these
+    sem_unlink("MUTEX_LOG");
+	mutex_log=sem_open("MUTEX_LOG",O_CREAT|O_EXCL,0700,1); // create semaphore
+	if(mutex_log==SEM_FAILED){
+		perror("Failure creating the semaphore MUTEX");
+    finish();
+    exit(1);
+	}
+
+	sem_unlink("MUTEX_MEMORY");
+	mutex_memory=sem_open("MUTEX_MEMORY",O_CREAT|O_EXCL,0700,0); // create semaphore
+	if(mutex_memory==SEM_FAILED){
+		perror("Failure creating the semaphore GO_WORKERS");
+    finish();
+    exit(1);
+	}
+
+    // creates authorization manager  (já é dado o numero de authorization engines que vao ser criados ao inicio)
+    //// creates authorization engines
+    //// creates sender/receiver
+    // creates monitor enginee
+    // creates message queue
 
     // waits to capture end signal
     // sends end signal to other processes (to end them)

@@ -13,8 +13,7 @@ typedef struct {
 } info_struct;
 
 typedef struct {
-    pid_t auth_engine; //pid auth_engine process
-	int client_id; //pid client process
+	pid_t client_id; //pid client process
     int plafond; 
 } mobile_struct;
 

@@ -87,8 +87,8 @@ int main()
                     write_log("Argument is invalid. Must be a positive integer");
                 }
                 count++;
+                printf("%d\n",count);
             }
-
             if(count != 6){
                 write_log("Invalid number of args.");
                 display_help(0);
