@@ -9,7 +9,6 @@
 
 int MOBILE_USERS, QUEUE_POS, AUTH_SERVERS, AUTH_PROC_TIME, MAX_VIDEO_WAIT, MAX_OTHERS_WAIT;
 
-
 void write_log(char *str){
     char timestamp[MBUF];
     
@@ -103,9 +102,11 @@ int main(int argc, char const *argv[])
     //reads config file
     read_config(argv[1]);
 
+    //cria shared mem (info + NMAX_USERS * client_struct + )
+
     //creates shared memory (needs struct and pointer arithmetics)
     
-    //creates authorization manager
+    //creates authorization manager  (já é dado o numero de authorization engines que vao ser criados ao inicio)
     //creates monitor enginee
     //creates message queue
 

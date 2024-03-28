@@ -6,7 +6,9 @@
 
 
 
-
+while(){
+    ./create_mobile randint(10-20) randint(20-30)
+}
 
 
 
